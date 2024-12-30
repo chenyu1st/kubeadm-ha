@@ -43,7 +43,8 @@
                 Ubuntu         : 20.04               <br>
                 Kylin          : V10                 <br>
                 Anolis OS      : 8                   <br>
-                OpenEuler      : 21.09, 22.03, 23.03
+                OpenEuler      : 21.09, 22.03, 23.03 <br>
+                Almalinux      : 8, 9
               </td>
           </tr>
           <tr>
@@ -128,12 +129,6 @@
   <br></br><sub><b>li-sen</b></sub>
 
 </td></tr></table>
-
-## JetBrains 开源证书支持
-
-`kubeadm-ha` 基于 **free JetBrains Open Source license(s)** 正版免费授权进行开发，在此表达我的谢意。
-
-<a href="https://www.jetbrains.com/?from=kubeadm-ha" target="_blank"><img src="https://raw.githubusercontent.com/panjf2000/illustrations/master/jetbrains/jetbrains-variant-4.png" width="250" align="middle"/></a>
 
 ## License
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FTimeBye%2Fkubeadm-ha.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FTimeBye%2Fkubeadm-ha?ref=badge_large)
