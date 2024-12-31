@@ -1,9 +1,6 @@
 #!/bin/bash
 set -eux;
 
-# 添加docker源
-curl -o /etc/yum.repos.d/docker-ce.repo https://download.docker.com/linux/centos/docker-ce.repo
-
 # 添加kubernetes源
 cat <<EOF | tee /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
@@ -30,37 +27,22 @@ case "${1:-centos7}" in
     sed -i 's|mirrors.aliyun.com|vault.centos.org|g' /etc/yum.repos.d/CentOS-*
     ;;
   openeuler)
-    sed -i 's|$releasever|8|g' /etc/yum.repos.d/docker-ce.repo
     yum install -y findutils createrepo
     ;;
   *)
-    yum install -y yum-utils epel-release createrepo
+    yum install -y yum-utils createrepo
     ;;
 esac
 
 packages=(
-    jq
-    git
-    curl
-    wget
-    htop
-    audit
-    iotop
     socat
     ipset
-    sysstat
     ipvsadm
     nmap-ncat
     nfs-utils
     iscsi-initiator-utils
-    net-tools
-    libseccomp
     conntrack-tools
     bash-completion
-    iproute
-    docker-ce-20.10.24
-    docker-ce-cli-20.10.24
-    containerd.io-1.6.20
     kubeadm-1.30.5
     kubectl-1.30.5
     kubelet-1.30.5
