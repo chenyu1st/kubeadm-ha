@@ -25,7 +25,7 @@
     until: stop_all_docker_containers.rc == 0
     delay: 5
   
-  - name: 清理 docker 相关数据
+  - name: 清理 Docker 相关数据
     ignore_errors: true
     shell: "docker system prune -a -f --volumes"
     args:
@@ -35,9 +35,21 @@
     until: remove_all_docker_data.rc == 0
     delay: 5
   
-  - name: 停止 docker 服务
+  - name: 停止 Docker.socket 服务
+    service:
+      name: docker.socket
+      state: stopped
+      enabled: no
+
+  - name: 停止 Docker 服务
     service:
       name: docker
+      state: stopped
+      enabled: no
+
+  - name: 停止 Containerd 服务
+    service:
+      name: containerd
       state: stopped
       enabled: no
 
@@ -46,24 +58,40 @@
       name: 
       - "docker-ce"
       - "docker-ce-cli"
+      - "containerd.io"
       state: absent
       enablerepo: docker-ce-stable
-    when: ansible_distribution is regex ("AlmaLinux|Rocky|openEuler|CentOS|OracleLinux|RedHat|Anolis|Kylin.*")
+    when: ansible_distribution is regex ("AlmaLinux|Rocky|openEuler|CentOS|OracleLinux|RedHat|Anolis|Kylin.*|UOS.*")
 
   - name: 卸载 Docker 服务
     apt: 
       name:
       - "docker-ce"
       - "docker-ce-cli"
+      - "containerd.io"
       state: absent
       allow_unauthenticated: true
     when: ansible_distribution in [ 'Ubuntu','Debian' ]
 
-  - name: 停止 containerd 服务
-    service:
-      name: containerd
-      state: stopped
-      enabled: yes
+  - name: 清除 Docker 相关二进制文件及目录
+    file: 
+      name: "{{ item }}"
+      state: absent
+    with_items:
+      - containerd
+      - containerd-shim-runc-v2
+      - ctr
+      - docker
+      - dockerd
+      - docker-init
+      - docker-proxy
+      - runc
+      - /etc/systemd/system/docker.service
+      - /etc/systemd/system/docker.socket
+      - /etc/systemd/system/containerd.service
+      - /etc/containerd/config.toml
+      - /etc/systemd/system/docker.service.d
+      - /etc/docker
 
   when: docker_status.stdout == "active"
 
@@ -77,9 +105,7 @@
   - name: 更新 /var/lib/kubelet/kubeadm-flags.env 配置文件
     shell: >
       sed -i
-      's;--hostname-override;--container-runtime=remote
-      --container-runtime-endpoint=/var/run/containerd/containerd.sock
-      --hostname-override;g'
+      's;unix:///var/run/cri-dockerd.sock;unix:///var/run/containerd/containerd.sock;g'
       /var/lib/kubelet/kubeadm-flags.env
     args:
       warn: no

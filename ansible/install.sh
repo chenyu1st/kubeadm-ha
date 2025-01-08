@@ -34,7 +34,7 @@ do_install() {
         sudo pip3 install --no-cache-dir ansible==2.10.7 netaddr -i https://mirrors.aliyun.com/pypi/simple/
         exit 0
       ;;
-    centos|fedora|rhel|ol|anolis|kylin|almalinux)
+    centos|fedora|rhel|ol|anolis|kylin|almalinux|uos)
         sudo yum install -y python3-pip sshpass libffi-devel python3-devel openssl-devel
         sudo pip3 install -U pip -i https://mirrors.aliyun.com/pypi/simple/
         sudo pip3 install --no-cache-dir ansible==2.10.7 netaddr -i https://mirrors.aliyun.com/pypi/simple/

@@ -27,11 +27,11 @@
     when: firewalld_already_installed.stdout == "active"
   when: "firewalld_disabled | default(True) | bool"
 
-- name: 设置 yum obsoletes 值为 0
-  lineinfile:
-    path: /etc/yum.conf
-    regexp: '^obsoletes'
-    line: obsoletes=0
+# - name: 设置 yum obsoletes 值为 0
+#   lineinfile:
+#     path: /etc/yum.conf
+#     regexp: '^obsoletes'
+#     line: obsoletes=0
 
 - name: 清除 yum 缓存
   command: yum clean all

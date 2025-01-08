@@ -89,3 +89,39 @@ jobs:
     secrets:
       OSS_TOKEN: ${{ secrets.OSS_TOKEN }}
       OSS_USERNAME: ${{ secrets.OSS_USERNAME }}
+
+  amd64-almalinux8:
+    uses: ./.github/workflows/amd64-almalinux8.yaml
+    secrets:
+      OSS_TOKEN: ${{ secrets.OSS_TOKEN }}
+      OSS_USERNAME: ${{ secrets.OSS_USERNAME }}
+
+  arm64-almalinux8:
+    uses: ./.github/workflows/arm64-almalinux8.yaml
+    secrets:
+      OSS_TOKEN: ${{ secrets.OSS_TOKEN }}
+      OSS_USERNAME: ${{ secrets.OSS_USERNAME }}
+
+  amd64-almalinux9:
+    uses: ./.github/workflows/amd64-almalinux9.yaml
+    secrets:
+      OSS_TOKEN: ${{ secrets.OSS_TOKEN }}
+      OSS_USERNAME: ${{ secrets.OSS_USERNAME }}
+
+  arm64-almalinux9:
+    uses: ./.github/workflows/arm64-almalinux9.yaml
+    secrets:
+      OSS_TOKEN: ${{ secrets.OSS_TOKEN }}
+      OSS_USERNAME: ${{ secrets.OSS_USERNAME }}
+
+  amd64-uos1070e:
+    uses: ./.github/workflows/amd64-uos1070e.yaml
+    secrets:
+      OSS_TOKEN: ${{ secrets.OSS_TOKEN }}
+      OSS_USERNAME: ${{ secrets.OSS_USERNAME }}
+
+  arm64-uos1070e:
+    uses: ./.github/workflows/arm64-uos1070e.yaml
+    secrets:
+      OSS_TOKEN: ${{ secrets.OSS_TOKEN }}
+      OSS_USERNAME: ${{ secrets.OSS_USERNAME }}

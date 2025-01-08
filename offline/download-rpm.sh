@@ -19,12 +19,8 @@ case "${1:-centos7}" in
 esac
 
 case "${1:-centos7}" in
-  kylin10)
-    echo "8" > /etc/yum/vars/releasever
-    echo "centos" > /etc/yum/vars/contentdir
-    curl -o /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-vault-8.5.2111.repo
-    sed -i 's|mirrors.aliyun.com/centos-vault|vault.centos.org|g' /etc/yum.repos.d/CentOS-*
-    sed -i 's|mirrors.aliyun.com|vault.centos.org|g' /etc/yum.repos.d/CentOS-*
+  kylin10|uos)
+    # Do Nothing
     ;;
   openeuler)
     yum install -y findutils createrepo
@@ -49,7 +45,7 @@ packages=(
     kubernetes-cni-1.4.0
 )
 
-if [ ! -d 'packages/repodata' ]; then
+if [ ! -d 'packages' ]; then
   (
     echo 'keepcache=1' >> /etc/yum.conf
     mkdir packages
@@ -60,12 +56,13 @@ if [ ! -d 'packages/repodata' ]; then
     yum install -y --downloadonly ${packages[*]}
     cp -rf `find /var/cache/{yum,dnf} -name '*.rpm'` .
   )
-  createrepo --update packages
+  createrepo --update packages || true
 fi
 
 case "${1:-centos7}" in
-  centos8|anolis8)
+  centos8|anolis8|almalinux)
     yum install -y modulemd-tools
+    createrepo --update packages || true
     repo2module -n timebye -s stable packages packages/repodata/modules.yaml
     modifyrepo_c --mdtype=modules packages/repodata/modules.yaml packages/repodata
     ;;

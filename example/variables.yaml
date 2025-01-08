@@ -23,8 +23,6 @@
 # #   - "tow.domain.custom.local"
 # custom_hosts: {}
 
-# # 是否nftables转换为iptables
-# nftables_to_iptables: false
 # #--------------------------------------------- 内核包下载地址 ----------------------------------------------#
 # # kernel repo
 # kernel_centos:
@@ -56,23 +54,6 @@
 # # 容器运行时类型（containerd 或者 docker）
 # container_manager: containerd
 
-# #----------------------------------------------- 容器运行时参数（不可配置项） -------------------------------------------#
-# # CRI socket path
-# cri_socket: >-
-#   {%- if container_manager == 'containerd' -%}
-#   unix:///var/run/containerd/containerd.sock
-#   {%- elif container_manager == 'docker' -%}
-#   unix:///var/run/cri-dockerd.sock
-#   {%- endif -%}
-
-# # 镜像拉取命令
-# image_pull_command: >-
-#   {%- if container_manager_detected == 'containerd' -%}
-#   crictl pull
-#   {%- else -%}
-#   docker pull
-#   {%- endif -%}
-
 # #-------------------------------- Containerd 相关配置（容器运行时类型为 Docker 时，请忽略) -------------------------------#
 # # 安装时发现 docker 或者 containerd 配置被修改则强制其重启应用新配置
 # restart_container_manager_force: true
@@ -80,8 +61,8 @@
 # runc_version: 1.2.2
 # containerd_version: 1.7.24
 
-# runc_download_url: "https://mirror.ghproxy.com/github.com/opencontainers/runc/releases/download/v{{ runc_version }}/runc.{{ host_architecture }}"
-# containerd_download_url: "https://mirror.ghproxy.com/github.com/containerd/containerd/releases/download/v{{ containerd_version }}/containerd-{{ containerd_version }}-linux-{{ host_architecture }}.tar.gz"
+# runc_download_url: "https://gh-proxy.com/github.com/opencontainers/runc/releases/download/v{{ runc_version }}/runc.{{ host_architecture }}"
+# containerd_download_url: "https://gh-proxy.com/github.com/containerd/containerd/releases/download/v{{ containerd_version }}/containerd-{{ containerd_version }}-linux-{{ host_architecture }}.tar.gz"
 
 # # 数据存储目录
 # containerd_storage_dir: "/var/lib/containerd"
@@ -122,7 +103,7 @@
 # cri_dockerd_version: 0.3.16
 
 # docker_download_url: "https://mirrors.aliyun.com/docker-ce/linux/static/stable/{{ ansible_architecture }}/docker-{{ docker_version }}.tgz"
-# cri_dockerd_download_url: "https://mirror.ghproxy.com/github.com/Mirantis/cri-dockerd/releases/download/v{{ cri_dockerd_version }}/cri-dockerd-{{ cri_dockerd_version }}.{{ host_architecture }}.tgz"
+# cri_dockerd_download_url: "https://gh-proxy.com/github.com/Mirantis/cri-dockerd/releases/download/v{{ cri_dockerd_version }}/cri-dockerd-{{ cri_dockerd_version }}.{{ host_architecture }}.tgz"
 
 # # Dockerhub 国内镜像加速地址
 # docker_mirror:
