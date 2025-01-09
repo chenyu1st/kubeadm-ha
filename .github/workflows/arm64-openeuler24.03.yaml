@@ -29,7 +29,6 @@ jobs:
             -w /kubeadm-ha \
             openeuler/openeuler:24.03 \
             /bin/bash offline/download-rpm.sh openeuler
-        /bin/bash offline/download-others.sh arm64
         tar -czvf packages.tgz packages
 
     - name: Upload arm64 artifact to oss
