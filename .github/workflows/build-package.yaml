@@ -6,6 +6,18 @@ on:
     - 'offline/*.sh'
     - 'example/variables.yaml'
 jobs:
+  amd64-base:
+    uses: ./.github/workflows/amd64-base.yaml
+    secrets: 
+      OSS_TOKEN: ${{ secrets.OSS_TOKEN }}
+      OSS_USERNAME: ${{ secrets.OSS_USERNAME }}
+
+  arm64-base:
+    uses: ./.github/workflows/arm64-base.yaml
+    secrets:
+      OSS_TOKEN: ${{ secrets.OSS_TOKEN }}
+      OSS_USERNAME: ${{ secrets.OSS_USERNAME }}
+
   amd64-images:
     uses: ./.github/workflows/amd64-images.yaml
     secrets: 
