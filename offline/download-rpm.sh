@@ -42,7 +42,6 @@ packages=(
     kubeadm-1.30.5
     kubectl-1.30.5
     kubelet-1.30.5
-    kubernetes-cni-1.4.0
 )
 
 if [ ! -d 'packages' ]; then

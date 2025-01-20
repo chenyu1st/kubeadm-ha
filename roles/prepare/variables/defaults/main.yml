@@ -203,15 +203,14 @@ docker_max_concurrent_downloads: 10
 # apt-cache madison kubeadm
 # yum list kubeadm --showduplicates --enablerepo=kubernetes | sort -r
 kube_version: 1.30.5
-kube_cni_version: 1.4.0
 
 # CentOS
 kubernetes_yum_repo: https://mirrors.aliyun.com/kubernetes-new/core/stable/v{{ kube_version.split('.')[0:2] | join('.') }}/rpm/
 
 # Debian
 # sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 6A030B21BA07F4FB
-# kubernetes_apt_repo: deb https://mirrors.aliyun.com/kubernetes-new/core/stable/v1.28/deb/ /
-kubernetes_apt_repo: deb https://mirrors.aliyun.com/kubernetes-new/core/stable/v{{ kube_version.split('.')[0:2] | join('.') }}/deb/ /
+# kubernetes_apt_repo: deb [trusted=yes] https://mirrors.aliyun.com/kubernetes-new/core/stable/v1.28/deb/ /
+kubernetes_apt_repo: deb [trusted=yes] https://mirrors.aliyun.com/kubernetes-new/core/stable/v{{ kube_version.split('.')[0:2] | join('.') }}/deb/ /
 
 # kubernetes各组件镜像仓库前缀
 kube_image_repository: registry.aliyuncs.com/kubeadm-ha

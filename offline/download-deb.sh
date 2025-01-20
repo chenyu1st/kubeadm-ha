@@ -35,8 +35,7 @@ set -eux;
   apt-get -d install -y \
     kubeadm=1.30.5-1.1 \
     kubectl=1.30.5-1.1 \
-    kubelet=1.30.5-1.1 \
-    kubernetes-cni=1.4.0-1.1
+    kubelet=1.30.5-1.1
 
   mv /var/cache/apt/archives/*.deb .
 )
