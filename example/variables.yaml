@@ -59,10 +59,10 @@
 # restart_container_manager_force: true
 # # Containerd 版本
 # runc_version: 1.2.2
-# containerd_version: 1.7.24
+# containerd_version: 1.7.25
 
-# runc_download_url: "https://gh-proxy.com/github.com/opencontainers/runc/releases/download/v{{ runc_version }}/runc.{{ host_architecture }}"
-# containerd_download_url: "https://gh-proxy.com/github.com/containerd/containerd/releases/download/v{{ containerd_version }}/containerd-{{ containerd_version }}-linux-{{ host_architecture }}.tar.gz"
+# runc_download_url: "https://files.saas.hand-china.com/kubeadm-ha/static/runc/v{{ runc_version }}/runc.{{ host_architecture }}"
+# containerd_download_url: "https://files.saas.hand-china.com/kubeadm-ha/static/containerd/v{{ containerd_version }}/containerd-{{ containerd_version }}-linux-{{ host_architecture }}.tar.gz"
 
 # # 数据存储目录
 # containerd_storage_dir: "/var/lib/containerd"
@@ -103,7 +103,7 @@
 # cri_dockerd_version: 0.3.16
 
 # docker_download_url: "https://mirrors.aliyun.com/docker-ce/linux/static/stable/{{ ansible_architecture }}/docker-{{ docker_version }}.tgz"
-# cri_dockerd_download_url: "https://gh-proxy.com/github.com/Mirantis/cri-dockerd/releases/download/v{{ cri_dockerd_version }}/cri-dockerd-{{ cri_dockerd_version }}.{{ host_architecture }}.tgz"
+# cri_dockerd_download_url: "https://files.saas.hand-china.com/kubeadm-ha/static/cri-dockerd/v{{ cri_dockerd_version }}/cri-dockerd-{{ cri_dockerd_version }}.{{ host_architecture }}.tgz"
 
 # # Dockerhub 国内镜像加速地址
 # docker_mirror:
