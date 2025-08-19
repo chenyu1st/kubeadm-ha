@@ -127,8 +127,8 @@ image_pull_command: >-
 # 安装时发现 docker 或者 containerd 配置被修改则强制其重启应用新配置
 restart_container_manager_force: true
 # Containerd 版本
-runc_version: 1.2.2
-containerd_version: 1.7.25
+runc_version: 1.2.6
+containerd_version: 1.7.28
 
 runc_download_url: "https://files.saas.hand-china.com/kubeadm-ha/static/runc/v{{ runc_version }}/runc.{{ host_architecture }}"
 containerd_download_url: "https://files.saas.hand-china.com/kubeadm-ha/static/containerd/v{{ containerd_version }}/containerd-{{ containerd_version }}-linux-{{ host_architecture }}.tar.gz"
@@ -169,7 +169,7 @@ pod_infra_container_image: "{{ kube_image_repository }}/pause:3.10"
 #------------------------------ Docker 相关配置（容器运行时类型为 Containerd 时，请忽略) ------------------------------ #
 # Docker 版本
 docker_version: 25.0.5
-cri_dockerd_version: 0.3.16
+cri_dockerd_version: 0.3.18
 
 docker_download_url: "https://mirrors.aliyun.com/docker-ce/linux/static/stable/{{ ansible_architecture }}/docker-{{ docker_version }}.tgz"
 cri_dockerd_download_url: "https://files.saas.hand-china.com/kubeadm-ha/static/cri-dockerd/v{{ cri_dockerd_version }}/cri-dockerd-{{ cri_dockerd_version }}.{{ host_architecture }}.tgz"
