@@ -13,12 +13,12 @@ calico/kube-controllers:v3.30.2
 calico/ctl:v3.30.2
 flannel/flannel:v0.27.2
 flannel/flannel-cni-plugin:v1.7.1-flannel2
-registry.k8s.io/kube-apiserver:v1.31.12
-registry.k8s.io/kube-controller-manager:v1.31.12
-registry.k8s.io/kube-scheduler:v1.31.12
-registry.k8s.io/kube-proxy:v1.31.12
+registry.k8s.io/kube-apiserver:v1.32.8
+registry.k8s.io/kube-controller-manager:v1.32.8
+registry.k8s.io/kube-scheduler:v1.32.8
+registry.k8s.io/kube-proxy:v1.32.8
 registry.k8s.io/pause:3.10
-registry.k8s.io/etcd:3.5.15-0
+registry.k8s.io/etcd:3.5.16-0
 registry.k8s.io/coredns/coredns:v1.11.3
 registry.k8s.io/ingress-nginx/controller:v1.13.1
 registry.k8s.io/ingress-nginx/kube-webhook-certgen:v1.6.1
