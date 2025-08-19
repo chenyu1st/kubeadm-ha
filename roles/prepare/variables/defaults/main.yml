@@ -483,7 +483,7 @@ kubernetesui_metrics_scraper_image: "{{ kube_image_repository }}/kubernetesui_me
 # 是否启用metrics-server
 metrics_server_enabled: true
 # metrics-server image地址
-metrics_server_image: "{{ kube_image_repository }}/metrics-server_metrics-server:v0.7.2"
+metrics_server_image: "{{ kube_image_repository }}/metrics-server_metrics-server:v0.8.0"
 
 #------------------------------------------------ 网络插件相关参数 --------------------------------------------#
 # 是否启用网络组建
@@ -496,8 +496,8 @@ network_plugin: "calico"
 flannel_backend: "vxlan"
 flannel_enable_nftables: false
 # flannel 镜像地址
-flannel_image: "{{ kube_image_repository }}/flannel_flannel:v0.25.7"
-flannel_cni_plugin_image: "{{ kube_image_repository }}/flannel_flannel-cni-plugin:v1.5.1-flannel2"
+flannel_image: "{{ kube_image_repository }}/flannel_flannel:v0.27.2"
+flannel_cni_plugin_image: "{{ kube_image_repository }}/flannel_flannel-cni-plugin:v1.7.1-flannel2"
 
 # 设置calico 网络 backend: brid, vxlan, none
 calico_backend: bird
@@ -505,12 +505,12 @@ calico_ipv4pool_ipip: "Always"
 # calico mtu
 calico_veth_mtu: 0
 # calico 相关镜像
-calico_typha_image: "{{ kube_image_repository }}/calico_typha:v3.28.2"
-calico_cni_image: "{{ kube_image_repository }}/calico_cni:v3.28.2"
-calico_node_image: "{{ kube_image_repository }}/calico_node:v3.28.2"
-calico_kube_controllers_image: "{{ kube_image_repository }}/calico_kube-controllers:v3.28.2"
+calico_typha_image: "{{ kube_image_repository }}/calico_typha:v3.30.2"
+calico_cni_image: "{{ kube_image_repository }}/calico_cni:v3.30.2"
+calico_node_image: "{{ kube_image_repository }}/calico_node:v3.30.2"
+calico_kube_controllers_image: "{{ kube_image_repository }}/calico_kube-controllers:v3.30.2"
 # calicoctl image 地址
-calicoctl_image: "{{ kube_image_repository }}/calico_ctl:v3.28.2"
+calicoctl_image: "{{ kube_image_repository }}/calico_ctl:v3.30.2"
 # 设置 Felix 日志级别(debug, info, warning, error)
 calico_felix_log_level: "warning"
 
