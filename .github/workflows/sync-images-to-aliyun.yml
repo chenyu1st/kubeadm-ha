@@ -32,8 +32,6 @@ jobs:
               - calico/pod2daemon-flexvol
               - calico/ctl
               - jettech/kube-webhook-certgen
-              - kubernetesui/dashboard
-              - kubernetesui/metrics-scraper
               - flannel/flannel
               - flannel/flannel-cni-plugin
         sync-policy:
@@ -82,42 +80,6 @@ jobs:
                 new: kubeadm-ha
             filters:
               - ^[Vv]?\d+\.\d+(\.\d+)?(-\d+)?$
-        EOF
-        registry-manager sync -c config.yaml
-
-  quay-to-aliyun:
-    runs-on: ubuntu-latest
-    container: setzero/registry-manager
-    env:
-      TO_USERNAME: ${{ secrets.TO_USERNAME }}
-      TO_PASSWORD: ${{ secrets.TO_PASSWORD }}
-    steps:
-    - name: Quay to Aliyun
-      run: |
-        cat << EOF >config.yaml
-        registries:
-          aliyuncs:
-            registry: https://registry.aliyuncs.com
-            username: ${{ secrets.TO_USERNAME }}
-            password: ${{ secrets.TO_PASSWORD }}
-          quay:
-            registry: https://quay.io
-            repositories:
-              - jetstack/cert-manager-cainjector
-              - jetstack/cert-manager-webhook
-              - jetstack/cert-manager-controller
-              - jetstack/cert-manager-acmesolver
-        sync-policy:
-          from: quay
-          to: aliyuncs
-          dry-run: false
-          replace:
-            - old: coreos/
-              new: kubeadm-ha/coreos_
-            - old: jetstack/
-              new: kubeadm-ha/jetstack_
-          filters:
-            - ^[Vv]?\d+\.\d+(\.\d+)?(-\d+)?$
         EOF
         registry-manager sync -c config.yaml
 

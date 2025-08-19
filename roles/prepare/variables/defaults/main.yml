@@ -470,15 +470,6 @@ traefik_certs_expired: 3650
 # traefik-ingress-controller 镜像地址
 traefik_ingress_image: "{{ kube_image_repository }}/traefik:v3.0.0"
 
-#----------------------------------------- kubernetes-dashboard 相关参数 --------------------------------------#
-# 是否启用kubernetes-dashboard
-kubernetesui_dashboard_enabled: false
-# dashboard默认证书有效期
-kubernetesui_dashboard_certs_expired: 3650
-# kubernetes-dashboard 镜像地址
-kubernetesui_dashboard_image: "{{ kube_image_repository }}/kubernetesui_dashboard:v2.7.0"
-kubernetesui_metrics_scraper_image: "{{ kube_image_repository }}/kubernetesui_metrics-scraper:v1.0.8"
-
 #-------------------------------------------- metrics-server 相关参数 ----------------------------------------#
 # 是否启用metrics-server
 metrics_server_enabled: true
@@ -513,17 +504,3 @@ calico_kube_controllers_image: "{{ kube_image_repository }}/calico_kube-controll
 calicoctl_image: "{{ kube_image_repository }}/calico_ctl:v3.30.2"
 # 设置 Felix 日志级别(debug, info, warning, error)
 calico_felix_log_level: "warning"
-
-#--------------------------------------------- cert-manager 相关参数 -----------------------------------------#
-# 是否启用cert-manager
-cert_manager_enabled: false
-
-# acme相关配置
-acme_server: https://acme-v02.api.letsencrypt.org/directory
-acme_email: yourname@gmail.com
-
-# cert-manager 相关 image 地址
-cert_manager_cainjector_image: "{{ kube_image_repository }}/jetstack_cert-manager-cainjector:v1.14.5"
-cert_manager_webhook_image: "{{ kube_image_repository }}/jetstack_cert-manager-webhook:v1.14.5"
-cert_manager_controller_image: "{{ kube_image_repository }}/jetstack_cert-manager-controller:v1.14.5"
-cert_manager_acmesolver_image: "{{ kube_image_repository }}/jetstack_cert-manager-acmesolver::v1.14.5"
