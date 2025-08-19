@@ -5,7 +5,7 @@ set -eux;
 cat <<EOF | tee /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
 name=Kubernetes
-baseurl=https://pkgs.k8s.io/core:/stable:/v1.32/rpm/
+baseurl=https://pkgs.k8s.io/core:/stable:/v1.33/rpm/
 enabled=1
 gpgcheck=0
 repo_gpgcheck=0
@@ -39,9 +39,9 @@ packages=(
     iscsi-initiator-utils
     conntrack-tools
     bash-completion
-    kubeadm-1.32.8
-    kubectl-1.32.8
-    kubelet-1.32.8
+    kubeadm-1.33.4
+    kubectl-1.33.4
+    kubelet-1.33.4
 )
 
 if [ ! -d 'packages' ]; then

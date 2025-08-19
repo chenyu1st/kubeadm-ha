@@ -133,7 +133,7 @@
 # # kubernetes版本
 # # apt-cache madison kubeadm
 # # yum list kubeadm --showduplicates --enablerepo=kubernetes | sort -r
-# kube_version: 1.32.8
+# kube_version: 1.33.4
 
 # # CentOS
 # kubernetes_yum_repo: https://mirrors.aliyun.com/kubernetes-new/core/stable/v{{ kube_version.split('.')[0:2] | join('.') }}/rpm/
@@ -176,7 +176,7 @@
 # kubeadm_token: "abcdef.0123456789abcdef"
 
 # # CoreDNS镜像地址
-# coredns_image: "{{ kube_image_repository }}/coredns:v1.11.3"
+# coredns_image: "{{ kube_image_repository }}/coredns:v1.12.0"
 
 # # NodePort端口范围
 # kube_service_node_port_range: 30000-32767
@@ -300,7 +300,7 @@
 # # Etcd根证书过期时间（天）
 # etcd_ca_certs_expired: 36500
 # # Etcd使用的镜像
-# etcd_image: "{{ kube_image_repository }}/etcd:3.5.16-0"
+# etcd_image: "{{ kube_image_repository }}/etcd:3.5.21-0"
 # # Etcd 数据根目录
 # etcd_data_dir: "/var/lib/etcd"
 # # Etcd 每日备份时间，默认3，即凌晨3点，取值范围0-23
