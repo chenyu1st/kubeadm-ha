@@ -4,7 +4,6 @@
 images="
 nginx:1.25-alpine
 haproxy:2.8-alpine
-traefik:v3.0.0
 osixia/keepalived:2.0.20
 setzero/chrony:3.5
 calico/typha:v3.30.2
@@ -21,8 +20,8 @@ registry.k8s.io/kube-proxy:v1.31.12
 registry.k8s.io/pause:3.10
 registry.k8s.io/etcd:3.5.15-0
 registry.k8s.io/coredns/coredns:v1.11.3
-registry.k8s.io/ingress-nginx/controller:v1.11.3
-registry.k8s.io/ingress-nginx/kube-webhook-certgen:v1.4.4
+registry.k8s.io/ingress-nginx/controller:v1.13.1
+registry.k8s.io/ingress-nginx/kube-webhook-certgen:v1.6.1
 registry.k8s.io/metrics-server/metrics-server:v0.8.0
 "
 

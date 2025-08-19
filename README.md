@@ -69,7 +69,7 @@
           </tr>
           <tr>
               <td align="left">Ingress controller</td>
-              <td align="left">traefik, <strong>nginx-ingress</strong></td>
+              <td align="left">nginx-ingress</td>
           </tr>
       </tbody>
   </table>
