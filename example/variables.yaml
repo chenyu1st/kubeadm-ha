@@ -133,7 +133,7 @@
 # # kubernetes版本
 # # apt-cache madison kubeadm
 # # yum list kubeadm --showduplicates --enablerepo=kubernetes | sort -r
-# kube_version: 1.30.5
+# kube_version: 1.30.14
 
 # # CentOS
 # kubernetes_yum_repo: https://mirrors.aliyun.com/kubernetes-new/core/stable/v{{ kube_version.split('.')[0:2] | join('.') }}/rpm/
