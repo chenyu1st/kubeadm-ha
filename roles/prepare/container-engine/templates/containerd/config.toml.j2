@@ -2,18 +2,14 @@ version = 2
 root = "{{ containerd_storage_dir }}"
 state = "{{ containerd_state_dir }}"
 oom_score = {{ containerd_oom_score }}
-
 [grpc]
   max_recv_message_size = {{ containerd_grpc_max_recv_message_size | default(16777216) }}
   max_send_message_size = {{ containerd_grpc_max_send_message_size | default(16777216) }}
-
 [debug]
   level = "{{ containerd_debug_level | default('info') }}"
-
 [metrics]
   address = "{{ containerd_metrics_address | default('') }}"
   grpc_histogram = {{ containerd_metrics_grpc_histogram | default(false) | lower }}
-
 [plugins]
   [plugins."io.containerd.grpc.v1.cri"]
     sandbox_image = "{{ pod_infra_container_image }}"
@@ -34,7 +30,6 @@ oom_score = {{ containerd_oom_score }}
 {% endfor %}
     [plugins."io.containerd.grpc.v1.cri".registry]
       config_path = "{{ containerd_registries_config_dir | default('/etc/containerd/certs.d') }}"
-
-{% if containerd_extra_args is defined %}
+{%- if containerd_extra_args is defined -%}
 {{ containerd_extra_args }}
-{% endif %}
+{%- endif -%}

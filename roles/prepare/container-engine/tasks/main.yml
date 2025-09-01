@@ -15,11 +15,9 @@
   when: 
   - container_manager == "docker"
 
-- include_tasks: docker/main.yml
+- include_tasks: docker/docker.yml
   when: 
   - container_manager == "docker"
-  - docker_already_running.stdout != "active"
-  - containerd_already_running.stdout != "active"
 
 - include_tasks: docker/cri-docker.yml
   when: 
@@ -29,5 +27,3 @@
 - include_tasks: containerd/main.yml
   when: 
   - container_manager == "containerd"
-  - docker_already_running.stdout != "active"
-  - containerd_already_running.stdout != "active"

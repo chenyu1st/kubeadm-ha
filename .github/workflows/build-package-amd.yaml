@@ -1,0 +1,73 @@
+name: Build base packages
+on:
+  workflow_dispatch:
+  push:
+    paths:
+    - 'offline/*.sh'
+    - 'example/variables.yaml'
+jobs:
+  amd64-base:
+    uses: ./.github/workflows/amd64-base.yaml
+    secrets: 
+      OSS_TOKEN: ${{ secrets.OSS_TOKEN }}
+      OSS_USERNAME: ${{ secrets.OSS_USERNAME }}
+
+  amd64-images:
+    uses: ./.github/workflows/amd64-images.yaml
+    secrets: 
+      OSS_TOKEN: ${{ secrets.OSS_TOKEN }}
+      OSS_USERNAME: ${{ secrets.OSS_USERNAME }}
+
+  amd64-centos7:
+    uses: ./.github/workflows/amd64-centos7.yaml
+    secrets:
+      OSS_TOKEN: ${{ secrets.OSS_TOKEN }}
+      OSS_USERNAME: ${{ secrets.OSS_USERNAME }}
+
+  amd64-centos8:
+    uses: ./.github/workflows/amd64-centos8.yaml
+    secrets:
+      OSS_TOKEN: ${{ secrets.OSS_TOKEN }}
+      OSS_USERNAME: ${{ secrets.OSS_USERNAME }}
+
+  amd64-anolis8:
+    uses: ./.github/workflows/amd64-anolis8.yaml
+    secrets:
+      OSS_TOKEN: ${{ secrets.OSS_TOKEN }}
+      OSS_USERNAME: ${{ secrets.OSS_USERNAME }}
+
+  amd64-ubuntu2204:
+    uses: ./.github/workflows/amd64-ubuntu22.04.yaml
+    secrets:
+      OSS_TOKEN: ${{ secrets.OSS_TOKEN }}
+      OSS_USERNAME: ${{ secrets.OSS_USERNAME }}
+
+  amd64-kylin10:
+    uses: ./.github/workflows/amd64-kylin10.yaml
+    secrets:
+      OSS_TOKEN: ${{ secrets.OSS_TOKEN }}
+      OSS_USERNAME: ${{ secrets.OSS_USERNAME }}
+
+  amd64-openeuler2403:
+    uses: ./.github/workflows/amd64-openeuler24.03.yaml
+    secrets:
+      OSS_TOKEN: ${{ secrets.OSS_TOKEN }}
+      OSS_USERNAME: ${{ secrets.OSS_USERNAME }}
+
+  amd64-almalinux8:
+    uses: ./.github/workflows/amd64-almalinux8.yaml
+    secrets:
+      OSS_TOKEN: ${{ secrets.OSS_TOKEN }}
+      OSS_USERNAME: ${{ secrets.OSS_USERNAME }}
+
+  amd64-almalinux9:
+    uses: ./.github/workflows/amd64-almalinux9.yaml
+    secrets:
+      OSS_TOKEN: ${{ secrets.OSS_TOKEN }}
+      OSS_USERNAME: ${{ secrets.OSS_USERNAME }}
+
+  amd64-uos1070e:
+    uses: ./.github/workflows/amd64-uos1070e.yaml
+    secrets:
+      OSS_TOKEN: ${{ secrets.OSS_TOKEN }}
+      OSS_USERNAME: ${{ secrets.OSS_USERNAME }}

@@ -1,13 +1,14 @@
 name: Sync images to Aliyun
 on:
+  workflow_dispatch:
   schedule:
-    - cron: '0 0 * * *'
+  - cron: '0 0 * * *'
   push:
     paths:
-      - 'example/variables.yaml'
+    - 'example/variables.yaml'
 jobs:
   dockerhub-to-aliyun:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     container: setzero/registry-manager
     env:
       TO_USERNAME: ${{ secrets.TO_USERNAME }}
@@ -31,10 +32,8 @@ jobs:
               - calico/pod2daemon-flexvol
               - calico/ctl
               - jettech/kube-webhook-certgen
-              - kubernetesui/dashboard
-              - kubernetesui/metrics-scraper
-              - flannelcni/flannel
-              - flannelcni/flannel-cni-plugin
+              - flannel/flannel
+              - flannel/flannel-cni-plugin
         sync-policy:
           from: dockerhub
           to: aliyuncs
@@ -46,9 +45,10 @@ jobs:
               new: kubeadm-ha/jettech_
             - old: kubernetesui/
               new: kubeadm-ha/kubernetesui_
-            - old: flannelcni/
-              new: kubeadm-ha/flannelcni_
+            - old: flannel/
+              new: kubeadm-ha/flannel_
           filters:
+            - flannel
             - ^[Vv]?\d+\.\d+(\.\d+)?(-\d+)?$
         EOF
         registry-manager sync -c config.yaml
@@ -64,11 +64,8 @@ jobs:
           dockerhub:
             registry: https://registry-1.docker.io
             repositories:
-              - library/nginx:1.23-alpine
-              - library/haproxy:2.3-alpine
-              - library/traefik:v2.9.6
-              - openresty/openresty:1.19.3.1-alpine
-              - envoyproxy/envoy:v1.16.2
+              - library/nginx:1.25-alpine
+              - library/haproxy:2.8-alpine
               - osixia/keepalived:2.0.20
         sync-policy:
             from: dockerhub
@@ -76,10 +73,6 @@ jobs:
             dry-run: false
             force: true
             replace:
-              - old: openresty/
-                new: kubeadm-ha/openresty_
-              - old: envoyproxy/
-                new: kubeadm-ha/envoyproxy_
               - old: osixia/
                 new: kubeadm-ha/osixia_
               - old: library
@@ -89,55 +82,8 @@ jobs:
         EOF
         registry-manager sync -c config.yaml
 
-    - name: Delete workflow runs
-      uses: GitRML/delete-workflow-runs@main
-      with:
-        retain_days: 7
-        keep_minimum_runs: 3
-
-  quay-to-aliyun:
-    runs-on: ubuntu-20.04
-    container: setzero/registry-manager
-    env:
-      TO_USERNAME: ${{ secrets.TO_USERNAME }}
-      TO_PASSWORD: ${{ secrets.TO_PASSWORD }}
-    steps:
-    - name: Quay to Aliyun
-      run: |
-        cat << EOF >config.yaml
-        registries:
-          aliyuncs:
-            registry: https://registry.aliyuncs.com
-            username: ${{ secrets.TO_USERNAME }}
-            password: ${{ secrets.TO_PASSWORD }}
-          quay:
-            registry: https://quay.io
-            repositories:
-              - jetstack/cert-manager-cainjector
-              - jetstack/cert-manager-webhook
-              - jetstack/cert-manager-controller
-        sync-policy:
-          from: quay
-          to: aliyuncs
-          dry-run: false
-          replace:
-            - old: coreos/
-              new: kubeadm-ha/coreos_
-            - old: jetstack/
-              new: kubeadm-ha/jetstack_
-          filters:
-            - ^[Vv]?\d+\.\d+(\.\d+)?(-\d+)?$
-        EOF
-        registry-manager sync -c config.yaml
-
-    - name: Delete workflow runs
-      uses: GitRML/delete-workflow-runs@main
-      with:
-        retain_days: 7
-        keep_minimum_runs: 3
-
   gcr-to-aliyun:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     container: setzero/registry-manager
     env:
       TO_USERNAME: ${{ secrets.TO_USERNAME }}
@@ -182,14 +128,14 @@ jobs:
         EOF
         registry-manager sync -c config.yaml
 
-  gcr-to-aliyun2:
-    runs-on: ubuntu-20.04
+  k8s-to-aliyun2:
+    runs-on: ubuntu-latest
     container: setzero/registry-manager
     env:
       TO_USERNAME: ${{ secrets.TO_USERNAME }}
       TO_PASSWORD: ${{ secrets.TO_PASSWORD }}
     steps:
-    - name: Gcr to Aliyun
+    - name: k8s to Aliyun
       run: |
         cat << EOF >config.yaml
         registries:
@@ -197,12 +143,12 @@ jobs:
             registry: https://registry.aliyuncs.com
             username: ${{ secrets.TO_USERNAME }}
             password: ${{ secrets.TO_PASSWORD }}
-          gcr:
-            registry: https://k8s.gcr.io
+          k8s:
+            registry: https://registry.k8s.io
             repositories:
               - ingress-nginx/kube-webhook-certgen
         sync-policy:
-          from: gcr
+          from: k8s
           to: aliyuncs
           dry-run: false
           replace:
@@ -213,14 +159,14 @@ jobs:
         EOF
         registry-manager sync -c config.yaml
 
-  gcr-to-aliyun3:
-    runs-on: ubuntu-20.04
+  k8s-to-aliyun:
+    runs-on: ubuntu-latest
     container: setzero/registry-manager
     env:
       TO_USERNAME: ${{ secrets.TO_USERNAME }}
       TO_PASSWORD: ${{ secrets.TO_PASSWORD }}
     steps:
-    - name: Gcr to Aliyun
+    - name: k8s to Aliyun
       run: |
         cat << EOF >config.yaml
         registries:
@@ -228,7 +174,7 @@ jobs:
             registry: https://registry.aliyuncs.com
             username: ${{ secrets.TO_USERNAME }}
             password: ${{ secrets.TO_PASSWORD }}
-          gcr:
+          k8s:
             registry: https://registry.k8s.io
             repositories:
               - kube-apiserver
@@ -239,21 +185,22 @@ jobs:
               - etcd
               - coredns
               - coredns/coredns
+              - ingress-nginx/controller
+              - ingress-nginx/kube-webhook-certgen
+              - metrics-server/metrics-server
         sync-policy:
-          from: gcr
+          from: k8s
           to: aliyuncs
           dry-run: false
           replace:
             - old: coredns/
               new: kubeadm-ha/
+            - old: ingress-nginx/
+              new: kubeadm-ha/ingress-nginx_
+            - old: metrics-server/
+              new: kubeadm-ha/metrics-server_
             - new: kubeadm-ha
           filters:
             - ^[Vv]?\d+\.\d+(\.\d+)?(-\d+)?$
         EOF
         registry-manager sync -c config.yaml
-
-    - name: Delete workflow runs
-      uses: GitRML/delete-workflow-runs@main
-      with:
-        retain_days: 7
-        keep_minimum_runs: 3

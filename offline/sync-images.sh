@@ -37,7 +37,7 @@ sync_image() {
     for project in $(ls ${SKOPEO_DIR}); do
         skopeo sync --insecure-policy --src-tls-verify=false --dest-tls-verify=false \
         --dest-creds ${REGISTRY_USER}:${REGISTRY_PWD} \
-        --src dir --dest docker ${SKOPEO_DIR}/${project} ${REGISTRY_DOMAIN}
+        --src dir --dest docker ${SKOPEO_DIR}/${project} ${REGISTRY_DOMAIN}/${project}
     done
 }
 
